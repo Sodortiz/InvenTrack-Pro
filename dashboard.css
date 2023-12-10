@@ -1,0 +1,119 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  height: 100%;
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+}
+
+.dashboard {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 270px;
+  background-color: #2c3e50;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 15px 0; 
+}
+
+.sidebar-header {
+  background-color: #34495e;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.sidebar-form {
+  padding: 15px;
+  overflow-y: auto; 
+}
+
+.main-content {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.header {
+  background-color: #2980b9;
+  color: white;
+  padding: 10px 20px;
+}
+
+.user-info {
+  font-size: 1.2em;
+}
+
+.product-registration,
+.inventory-list {
+  padding: 20px;
+}
+
+.footer {
+  background-color: #34495e;
+  color: white;
+  text-align: center;
+  padding: 10px 20px;
+  position: sticky;
+  bottom: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f0f0f0;
+}
+
+input, select, button {
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #1abc9c;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #16a085;
+}
+
+.sidebar-form label {
+  display: block;
+  margin: 10px 0 5px;
+}
+
+.sidebar-form input[type="text"],
+.sidebar-form input[type="date"],
+.sidebar-form textarea,
+.sidebar-form select,
+.sidebar-form button {
+  width: calc(100% - 20px);
+  margin-bottom: 10px;
+}
+
+.sidebar-form button {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+}

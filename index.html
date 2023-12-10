@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InvenTrack Pro - Inicio de Sesión</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>InvenTrack Pro</h1>
+        </div>
+        <form id="loginForm" class="login-form" action="/login" method="post">
+            <div class="form-group">
+                <input type="text" id="username" name="username" placeholder="Nombre de Usuario" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" name="password" placeholder="Contraseña" required>
+            </div>
+            <div class="form-action">
+                <button type="submit">Iniciar Sesión</button>
+            </div>
+            <div id="error-message" style="color: red; display: none;">
+                Credenciales inválidas.
+            </div>
+        </form>
+    </div>
+
+    <script>
+        window.onload = function() {
+            // Crea un objeto URLSearchParams con los parametros de consulta de la URL actual
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            // Intenta obtener el valor del parametro 'error' de la URL
+            const error = urlParams.get('error');
+            
+            // Verifica si existe el parametro 'error'
+            if (error) {
+                // Si hay un error, muestra el elemento con ID 'error-message'
+                // asumiendo que hay un elemento en tu HTML con ese ID que es para mostrar mensajes de error
+                document.getElementById('error-message').style.display = 'block';
+            }
+        };
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InvenTrack Pro - Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar: Formulario de Registro de Producto -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>Registro de Producto</h2>
+            </div>
+            <form id="productForm" action="/registrarProducto" method="post" class="sidebar-form">
+                <!-- Campos de Formulario -->
+                <label for="productCode">Código del Producto (ID):</label>
+                <input type="text" id="productCode" name="codigo" required>
+                
+                <label for="productName">Nombre del Producto:</label>
+                <input type="text" id="productName" name="nombre" required>
+                
+                <label for="productDescription">Descripción del Producto:</label>
+                <textarea id="productDescription" name="descripcion"></textarea>
+                
+                <label for="productDate">Fecha de Ingreso:</label>
+                <input type="date" id="productDate" name="fecha_ingreso" required>
+                
+                <label for="clientName">Nombre del Cliente:</label>
+                <input type="text" id="clientName" name="nombre_cliente" required>
+                
+                <label for="projectId">ID del Proyecto:</label>
+                <input type="text" id="projectId" name="id_proyecto" required>
+                
+                <label for="productComments">Comentarios:</label>
+                <textarea id="productComments" name="comentarios" required></textarea>
+                
+                <!-- Lista Desplegable de Estado -->
+                <label for="productStatus">Estatus:</label>
+                <select id="productStatus" name="estatus" required>
+                    <!-- Opciones de Estado -->
+                    <% const estados = ["En progreso", "Rechazado", "Cancelado", "Cerrado", "En pruebas de calidad", "En validación por el usuario", "En proceso de liberación"];
+                    estados.forEach(function(estado) { %>
+                        <option value="<%= estado %>"><%= estado %></option>
+                    <% }); %>
+                </select>
+    
+                <button type="submit" id="btnRegistrarProducto">Registrar Producto</button>
+            </form>
+        </nav>
+
+        <!-- Contenido Principal -->
+        <main class="main-content">
+            <!-- Encabezado con Informacion del Usuario -->
+            <header class="header">
+                <span class="user-info">Bienvenido, <%= name %></span>
+            </header>
+
+            <!-- Lista de Inventario -->
+            <section class="inventory-list">
+                <!-- Filtro de Estatus -->
+                <div id="statusFilter">
+                    <label for="estatusFilter">Filtrar por Estatus:</label>
+                    <select id="estatusFilterSelect">
+                        <option value="Todos">Todos</option>
+                        <!-- Opciones de Estado Repetidas -->
+                        <% estados.forEach(function(estado) { %>
+                            <option value="<%= estado %>"><%= estado %></option>
+                        <% }); %>
+                    </select>                    
+                </div>
+
+                <!-- Tabla de Productos -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Fecha de Ingreso</th>
+                            <th>Nombre del Cliente</th>
+                            <th>ID del Proyecto</th>
+                            <th>Comentarios</th>
+                            <th>Estatus</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Iteracion de Productos -->
+                        <% productos.forEach(function(producto) { %>
+                            <tr data-codigo-producto="<%= producto.codigo %>">
+                                <td><%= producto.codigo %></td>
+                                <td><%= producto.nombre %></td>
+                                <td><%= producto.descripcion %></td>
+                                <td><%= producto.fecha_ingreso %></td>
+                                <td><%= producto.nombre_cliente %></td>
+                                <td><%= producto.id_proyecto %></td>
+                                <td><%= producto.comentarios %></td>
+                                <td><%= producto.estatus %></td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Modal de Detalles y Modificacion de Producto -->
+            <div id="productModal" class="modal">
+                <div class="modal-content">
+                    <span class="close"></span>
+                    <div id="taskDetails" style="display:none;">
+                        <h3>Detalles de la Tarea</h3>
+                        <!-- Detalles del Producto -->
+                        <p>Código: <span id="detallesCodigo"></span></p>
+                        <p>Descripción: <span id="detallesDescripcion"></span></p>
+                        <p>Fecha de Ingreso: <span id="detallesFechaIngreso"></span></p>
+                        <p>Nombre del Cliente: <span id="detallesNombreCliente"></span></p>
+                        <p>ID del Proyecto: <span id="detallesId"></span></p>
+                        <p>Comentarios: <span id="detallesComentarios"></span></p>
+                        <p>Estatus: <span id="detallesEstatus"></span></p>
+                    </div>
+                    <div id="modifySection" style="display:none;">
+                        <h3>Modificar Tarea</h3>
+                        <!-- Formulario de Modificacion -->
+                        <label for="statusSelect">Estatus:</label>
+                        <select id="statusSelect">
+                            <!-- Opciones de Estado Repetidas -->
+                            <% estados.forEach(function(estado) { %>
+                                <option value="<%= estado %>"><%= estado %></option>
+                            <% }); %>
+                        </select>
+
+                        <label for="newComment">Nuevo Comentario:</label>
+                        <input type="text" id="newComment">
+
+                        <button id="updateButton">Actualizar Tarea</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
